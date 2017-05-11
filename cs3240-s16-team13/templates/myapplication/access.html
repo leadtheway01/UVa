@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block bootstrap3_content %}
+
+<head>
+   <title>SafeCollab</title>
+</head>
+<style>
+   .wrapper {
+       max-width: 420px;
+       padding: 30px 38px 0px;
+       margin-top: 50px;
+       margin-bottom: 0px;
+       font-size: 16px;
+       text-align: center;
+       margin-left: auto;
+       margin-right: auto;
+   }
+   .colorgraph {
+       height: 7px;
+       border-top: 0;
+       border-radius: 5px;
+       background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+       background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+       background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+       background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+   }
+   .heading {
+       text-align: center;
+       margin-bottom: 30px;
+   }
+   .menu {
+       padding:20px;
+   }
+</style>
+<body>
+ <nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    {% if user.is_authenticated %}
+      <h1><a href = "/index1/" ><span class="glyphicon glyphicon-home"> SafeCollab </span></a></h1>
+    {% else %}
+    <h1><a href = "/" ><span class="glyphicon glyphicon-home"> SafeCollab </span></a></h1>
+    {% endif %}
+<div class="bs-example">
+    <ul class="nav nav-pills">
+        {% if user.is_authenticated %}
+        <li class="active"><a href="/index1/">Home</a></li>
+        {%else%}
+        <li class="active"><a href="/">Home</a></li>
+        {%endif%}
+        <li class="dropdown">
+            <a href="/reports" data-toggle="dropdown" class="dropdown-toggle">Profile <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="/reports">View Current Reports</a></li>
+                <li><a href="/modifygroup">Create Group</a></li>
+                <li><a href="/uploadfile">Create Report</a></li>
+                <li><a href="/access/"> Access files</a></li>
+                <li><a href="/modifyfolder/"> Modify folders</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="/message" data-toggle="dropdown" class="dropdown-toggle">Messages <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="/inbox">Inbox</a></li>
+                <li><a href="/compose">Compose</a></li>
+                <li><a href="/outbox">Sent Items</a></li>
+                <li class="divider"></li>
+                <li><a href="/trash">Trash</a></li>
+            </ul>
+        </li>
+    </ul>
+
+
+</div>
+      </div>
+</nav>
+
+</body>
+<body>
+<div class="wrapper">
+   {% if user.is_authenticated %}
+   <h3 class="heading">Here are your files, {{ user.username }}!</h3>
+   <hr class="colorgraph">
+   <div class = "menu">
+       <div class="sidebar-nav">
+           <div class="well" style="width:300px; padding: 8px 0;">
+               <ol class="nav nav-list">
+                   {%for group in groups %}
+                       {% for folder in folders %}
+                               <h3>{{folder.title}}</h3>
+                               {% for element in query %}
+                                   {% if element.folder == folder and element.file_1 %}
+                                       <li><a href="/downloads/{{element.file_1}}" download=>{{ element.file_1 }}</a></li>
+                                   {% endif %}
+                                   {% if element.folder == folder and element.file_2%}
+                                       <li><a href="/downloads/{{element.file_2}}" download=>{{ element.file_2}}</a></li>
+                                   {% endif %}
+                                   {% if element.folder == folder and element.file_3 %}
+                                       <li><a href="/downloads/{{element.file_3}}" download=>{{ element.file_3}}</a></li>
+                                   {% endif %}
+                               {% endfor %}
+                       {% endfor %}
+                       {% for upload in query %}
+                            {% if upload.folder == null and upload.file_1 %}
+                                <li><a href="/downloads/{{upload.file_1}}" download=>{{ upload.file_1 }}</a></li>
+                            {% endif %}
+                            {% if upload.folder == null and upload.file_2 %}
+                                <li><a href="/downloads/{{upload.file_2}}" download=>{{ upload.file_2 }}</a></li>
+                            {% endif %}
+                            {% if upload.folder == null and upload.file_3 %}
+                                <li><a href="/downloads/{{upload.file_3}}" download=>{{ upload.file_3 }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                   {{ user_getFolderContents.runid }}
+                   {% endfor %}
+                   
+               </ol>
+
+           </div>
+           </div>
+       </div>
+   {% else %}
+   <h3 class="heading">Welcome to SafeCollab</h3>
+   <hr class="colorgraph">
+   <div class = "menu">
+       <div class="sidebar-nav">
+           <div class="well" style="width:300px; padding: 8px 0;">
+               <ul class="nav nav-list">
+                 <li><a href="/register/"><i class="glyphicon glyphicon-user"></i> Register Here</a></li>
+                 <li><a href="/login/"><i class="glyphicon glyphicon-lock"></i> Login </a></li>
+               </ul>
+           </div>
+           </div>
+       </div>
+   {% endif %}
+   {% endblock %}
+</div>
+
+</body>
+
+</html>

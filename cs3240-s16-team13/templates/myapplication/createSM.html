@@ -1,0 +1,133 @@
+<html>
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<head>
+    <style>
+        .wrapper {
+            margin-top: 80px;
+            margin-bottom: 20px;
+        }
+        .colorgraph {
+            height: 5px;
+            border-top: 0;
+            background: #c4e17f;
+            border-radius: 5px;
+            background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        }
+        .form-register {
+            max-width: 420px;
+            padding: 30px 38px 66px;
+            margin: 0 auto;
+        }
+        .user-form {
+            position: relative;
+            font-size: 16px;
+            height: auto;
+            padding: 10px;
+        }
+        h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style type="text/css">
+   .bs-example{
+       margin: 20px;
+    }
+    hr{
+        margin: 60px 0;
+    }
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+      <h1><a href = "/" ><span class="glyphicon glyphicon-home"> SafeCollab </span></a></h1>
+
+<div class="bs-example">
+    <ul class="nav nav-pills">
+        <li class="active"><a href="#">Home</a></li>
+        <li class="dropdown">
+            <a href="/reports" data-toggle="dropdown" class="dropdown-toggle">Profile <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="/reports">View Current Reports</a></li>
+                <li><a href="/modifygroup">Create Group</a></li>
+                <li><a href="/uploadfile">Create Report</a></li>
+            </ul>
+        </li>
+
+
+
+
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Messages <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Inbox</a></li>
+                <li><a href="#">Drafts</a></li>
+                <li><a href="#">Sent Items</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Trash</a></li>
+            </ul>
+        </li>
+    </ul>
+
+
+</div>
+      </div>
+
+</nav>
+
+<body>
+<div class="container">
+    <div class="wrapper">
+
+        <div class="row">
+            <div class="form-register">
+                <div role="form">
+    <body>
+        <h1>Create New Site Manager</h1>
+        <hr class="colorgraph">
+
+        {% if registered %}
+        Team13 says: <strong>thank you for creating new SM!</strong>
+        <a href="/staff">Return to the homepage.</a><br />
+        {% else %}
+        Team13 says: <strong>register here!</strong><br />
+
+        <form id="user_form" method="post" action="/createSM/"
+                enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <!-- Display each form. The as_p method wraps each element in a paragraph
+                 (<p>) element. This ensures each element appears on a new line,
+                 making everything look neater. -->
+            <div class="user-form">
+            {{ user_form.as_p }}
+<div class="row">
+            <!-- Provide a button to click to submit the form. -->
+           <button class="btn btn-lg btn-primary btn-block" name="Register" value="Register"
+                                        type="Submit">Register
+                                </button>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

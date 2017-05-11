@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Team 13</title>
+    </head>
+ 
+    <body>
+        <h1>Create a Folder in SafeCollab</h1>
+ 
+        {% if registered %}
+        <a href="/">Return to the homepage.</a><br />
+        {% else %}
+        Team13 says: <strong>Create a folder here!</strong><br/><br/>
+        <form id="createfolder_form" method="post" action="/modifyfolder/"
+                enctype="multipart/form-data">
+ 
+            {% csrf_token %}
+ 
+            {{ createfolder_form.as_p }}
+ 
+            <!-- Provide a button to click to submit the form. -->
+            <input type="submit" name="submit" value="Create" />
+        </form>
+        {% endif %}
+    </body>
+</html>

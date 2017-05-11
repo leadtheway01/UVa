@@ -1,0 +1,128 @@
+<<<<<<< HEAD:cs3240-s16-team13/templates/myapplication/index.html
+<!DOCTYPE html>
+<html>
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block bootstrap3_content %}
+
+<head>
+    <title>SafeCollab</title>
+</head>
+
+<style>
+    .wrapper {
+        max-width: 420px;
+        padding: 30px 38px 66px;
+        margin-top: 80px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .colorgraph {
+        height: 7px;
+        border-top: 0;
+        border-radius: 5px;
+        background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    }
+
+    .heading {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .menu {
+        padding:20px;
+    }
+</style>
+
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <h1><a href=""><span class="glyphicon glyphicon-home"> SafeCollab </span></a></h1>
+    </div>
+
+</nav>
+
+<body>
+<div class="wrapper">
+    {% if user.is_authenticated %}
+    <h3 class="heading">Welcome to SafeCollab, {{ user.username }}!</h3>
+    <!--<p>{{user.is_staff}}</p>-->
+    <hr class="colorgraph">
+    <div class = "menu">
+        <div class="sidebar-nav">
+            <div class="well" style="width:300px; padding: 8px 0;">
+        		<ul class="nav nav-list">
+                <li><a href="/reports">View Current Reports</a></li>
+        		  <li><a href="/modifygroup/"> Modify groups</a></li>
+                  <li><a href="/uploadfile/">Create reports and files</a></li>
+                   <li><a href="/access/"> Access reports</a></li>
+                <li><a href="/modifyfolder/"> Modify folders</a></li>
+                  <li><a href="/logout/"><i class="glyphicon glyphicon-lock"></i> Logout </a></li>
+        		</ul>
+        	</div>
+            </div>
+        </div>
+
+    {% else %}
+    <h3 class="heading">Welcome to SafeCollab</h3>
+    <hr class="colorgraph">
+    <div class = "menu">
+        <div class="sidebar-nav">
+            <div class="well" style="width:300px; padding: 8px 0;">
+        		<ul class="nav nav-list">
+        		  <li><a href="/register/"><i class="glyphicon glyphicon-user"></i> Register Here</a></li>
+                  <li><a href="/login/"><i class="glyphicon glyphicon-lock"></i> Login </a></li>
+        		</ul>
+        	</div>
+            </div>
+        </div>
+    {% endif %}
+    {% endblock %}
+</div>
+</body>
+
+=======
+<!DOCTYPE html>
+<html>
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block bootstrap3_content %}
+
+    <nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+<h1>SafeCollab</h1>
+  </div>
+</nav>
+    <head>
+        <title>Team13</title>
+    </head>
+
+    <body>
+    	{% if user.is_authenticated %}
+		<h1>Welcome to the Site Manager page, {{ user.username }}!</h1>
+        <a href ="/myapplication/modifygroup/">Modify a group</a><br/>
+            <a href ="/myapplication/activeUsers/">View Active Users</a><br/>
+            <a href ="/myapplication/createSM/">Create new Site Manager</a><br/>
+		<a href="/myapplication/logout/">Logout</a><br />
+
+		{% else %}
+		<h1>Welcome to SafeCollab</h1>
+        <a href="/myapplication/register/">Register Here</a><br />
+        <a href="/myapplication/login/">Login</a>
+                {% endif %}
+    {% endblock %}
+    </body>
+
+>>>>>>> 48b66d308f9eb8a630a73ce8ca1e98ce6d4e3ac6:templates/myapplication/staff.html
+</html>

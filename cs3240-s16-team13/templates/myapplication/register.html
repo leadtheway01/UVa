@@ -1,0 +1,85 @@
+<html>
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<head>
+    <style>
+        .wrapper {
+            margin-top: 80px;
+            margin-bottom: 20px;
+        }
+        .colorgraph {
+            height: 5px;
+            border-top: 0;
+            background: #c4e17f;
+            border-radius: 5px;
+            background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        }
+        .form-register {
+            max-width: 420px;
+            padding: 30px 38px 66px;
+            margin: 0 auto;
+        }
+        .user-form {
+            position: relative;
+            font-size: 16px;
+            height: auto;
+            padding: 10px;
+        }
+        h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+      <h1><a href = "/" ><span class="glyphicon glyphicon-home"> SafeCollab </span></a></h1>
+  </div>
+
+</nav>
+
+<body>
+<div class="container">
+    <div class="wrapper">
+
+        <div class="row">
+            <div class="form-register">
+                <div role="form">
+                    <h3>Register on SafeCollab!</h3>
+                    <hr class="colorgraph">
+
+                    {% if registered %}
+                        <h3>Thank you for registering!</h3><br/>
+                        <h3><a href="/">Return to the homepage.</a><br /></h3>
+                    {% else %}
+
+                    <form id="user_form" method="post" action="/register/"
+                          enctype="multipart/form-data">
+
+                        {% csrf_token %}
+                        <div class="user-form">
+                            {{ user_form.as_p }}
+
+                            {{ profile_form.as_p }}
+                            <div class="row">
+                                <br/>
+                                <button class="btn btn-lg btn-primary btn-block" name="Register" value="Register"
+                                        type="Submit">Register
+                                </button>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

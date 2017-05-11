@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block bootstrap3_content %}
+<head>
+    <title>Team 13</title>
+</head>
+
+<style>
+    .wrapper {
+        max-width: 420px;
+        padding: 30px 38px 66px;
+        margin-top: 80px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .colorgraph {
+        height: 7px;
+        border-top: 0;
+        border-radius: 5px;
+        background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    }
+    .heading {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+</style>
+
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <h1><a href="/index1/"><span class="glyphicon glyphicon-home"> SafeCollab </span></a></h1>
+    </div>
+
+</nav>
+
+<body>
+<div class="wrapper">
+<h3 class ="heading">upload private key</h3>
+    <hr class = "colorgraph">
+{% if registered %}
+<a href="/index1/">Return to the homepage.</a><br/>
+{% else %}
+Team13 says: <strong>upload private key</strong><br/><br/>
+{% if validCreate %}
+<div class="alert alert-success"><strong>
+    Your private key has been uploaded!
+</strong></div>
+<br/>
+{% endif %}
+
+<form id="form" method="post" action="/decView/"
+      enctype="multipart/form-data" class="form">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <br/>
+    <button class="btn btn-lg btn-primary btn-block" name="submit" value="KeyUpload" type="submit">Upload</button>
+</form>
+<br/><br/>
+{% endif %}
+{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block bootstrap3_content %}
+<head>
+   <title>Team 13</title>
+</head>
+<style>
+   .wrapper {
+       max-width: 420px;
+       padding: 30px 38px 66px;
+       margin-top: 80px;
+       margin-bottom: 20px;
+       font-size: 16px;
+       text-align: center;
+       margin-left: auto;
+       margin-right: auto;
+   }
+   .colorgraph {
+       height: 7px;
+       border-top: 0;
+       border-radius: 5px;
+       background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+       background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+       background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+       background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+   }
+   .heading {
+       text-align: center;
+       margin-bottom: 30px;
+   }
+</style>
+
+
+
+<body>
+     <nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    {% if user.is_authenticated %}
+      <h1><a href = "/index1/" ><span class="glyphicon glyphicon-home"> SafeCollab </span></a></h1>
+    {% else %}
+    <h1><a href = "/" ><span class="glyphicon glyphicon-home"> SafeCollab </span></a></h1>
+    {% endif %}
+<div class="bs-example">
+    <ul class="nav nav-pills">
+        {% if user.is_authenticated %}
+        <li class="active"><a href="/index1/">Home</a></li>
+        {%else%}
+        <li class="active"><a href="/">Home</a></li>
+        {%endif%}
+        <li class="dropdown">
+            <a href="/reports" data-toggle="dropdown" class="dropdown-toggle">Profile <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="/reports">View Current Reports</a></li>
+                <li><a href="/modifygroup">Create Group</a></li>
+                <li><a href="/uploadfile">Create Report</a></li>
+                <li><a href="/access/"> Access files</a></li>
+                <li><a href="/modifyfolder/"> Modify folders</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="/message" data-toggle="dropdown" class="dropdown-toggle">Messages <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="/inbox">Inbox</a></li>
+                <li><a href="/compose">Compose</a></li>
+                <li><a href="/outbox">Sent Items</a></li>
+                <li class="divider"></li>
+                <li><a href="/trash">Trash</a></li>
+            </ul>
+        </li>
+    </ul>
+
+
+</div>
+      </div>
+</nav>
+
+<body>
+
+<div class="wrapper">
+   <h3 class="heading">Modify a Folder in SafeCollab</h3>
+   <hr class="colorgraph">
+
+   {% if registered %}
+   <a href="/">Return to the homepage.</a><br/>
+   {% else %}
+   Team13 says: <strong>Create a folder here!</strong><br/><br/>
+   {% if validFolderCreate %}
+   <div class="alert alert-success"><strong>
+       Your folder has been created!
+   </strong></div>
+   <br/>
+   {% endif %}
+
+   <form id="creategroup_form" method="post" action="/createfolder/"
+         enctype="multipart/form-data" class="form">
+
+       {% csrf_token %}
+
+       {{ createfolder_form.as_p }}
+
+       <!--<input type="submit" name="submit" value="Create" />-->
+       <button class="btn btn-lg btn-primary btn-block" name="submit" value="Create" type="submit">Create</button>
+   </form>
+
+   <br/><br/>
+   Team13 says: <strong>Remove a folder!</strong><br/>
+   {% if removed %}
+   <br/>
+   <div class="alert alert-success"><strong>
+       Folder has been removed!
+   </strong></div>
+   <br/>
+   {% endif %}
+   {% if attemptedRemove %}
+    <br/>
+   <div class="alert alert-danger"><strong>
+       Please enter a valid file!
+   </strong></div>
+   <br/>
+   {% endif %}
+
+   <form id="removefolder_form" method="post" action="/removefolder/"
+         enctype="multipart/form-data">
+       {% csrf_token %}
+
+       {{ removefolder_form.as_p }}
+
+       <button class="btn btn-lg btn-primary btn-block" name="submit" value="Add" type="submit">Remove</button>
+   </form>
+
+   <br/><br/>
+   Team13 says: <strong>Rename a folder!</strong><br/>
+   {% if renamed %}
+   <br/>
+   <div class="alert alert-success"><strong>
+       Folder has been renamed!
+   </strong></div>
+   <br/>
+   {% endif %}
+   {% if attemptedRename %}
+    <br/>
+   <div class="alert alert-danger"><strong>
+       Please enter a valid file!
+   </strong></div>
+   <br/>
+   {% endif %}
+
+   <form id="renamefolder_form" method="post" action="/renamefolder/"
+         enctype="multipart/form-data">
+       {% csrf_token %}
+
+       {{ renamefolder_form.as_p }}
+
+       <button class="btn btn-lg btn-primary btn-block" name="submit" value="Rename" type="submit">Rename</button>
+   </form>
+
+   {% endif %}
+   {% endblock %}
+
+   </h3>
+</div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block bootstrap3_content %}
+
+<head>
+    <title>SafeCollab</title>
+</head>
+
+<style>
+    .wrapper {
+        max-width: 420px;
+        padding: 30px 38px 66px;
+        margin-top: 80px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .colorgraph {
+        height: 7px;
+        border-top: 0;
+        border-radius: 5px;
+        background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    }
+    .heading {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .menu {
+        padding:20px;
+    }
+</style>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style type="text/css">
+	.bs-example{
+    	margin: 20px;
+    }
+    hr{
+        margin: 60px 0;
+    }
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+      <h1><a href = "/index1/" ><span class="glyphicon glyphicon-home"> SafeCollab </span></a></h1>
+
+<div class="bs-example">
+    <ul class="nav nav-pills">
+        <li class="active"><a href="/">Home</a></li>
+        <li class="dropdown">
+            <a href="/reports" data-toggle="dropdown" class="dropdown-toggle">Profile <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="/reports">View Current Reports</a></li>
+                <li><a href="/modifygroup">Create Group</a></li>
+                <li><a href="/uploadfile">Create Report</a></li>
+                <li><a href="/access/"> Access reports</a></li>
+                <li><a href="/modifyfolder/"> Modify folders</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown">
+            <a href="/message" data-toggle="dropdown" class="dropdown-toggle">Messages <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="/inbox">Inbox</a></li>
+                <li><a href="/compose">Compose</a></li>
+                <li><a href="/outbox">Sent Items</a></li>
+                <li class="divider"></li>
+                <li><a href="/trash">Trash</a></li>
+            </ul>
+        </li>
+    </ul>
+
+
+</div>
+      </div>
+
+</nav>
+
+<body>
+<div class="wrapper">
+    <h3 class="heading"><i class="glyphicon glyphicon-envelope"> Message</i></h3>
+    <hr class="colorgraph">
+    <div class = "menu">
+        <div class="sidebar-nav">
+            <div class="well" style="width:300px; padding: 8px 0;">
+                <ul class="nav nav-list">
+                  <li><a href="/inbox/"><i class="glyphicon glyphicon-envelope"></i> Inbox</a></li>
+                  <li><a href="/outbox/"><i class="glyphicon glyphicon-envelope"></i> Outbox</a></li>
+                  <li><a href="/compose/"><i class="glyphicon glyphicon-edit"></i> Compose</a></li>
+                  <li><a href="/trash/"><i class="glyphicon glyphicon-trash"></i> Trash</a></li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    {% endblock %}
+</div>
+</body>
+
+</html>
