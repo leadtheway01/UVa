@@ -1,0 +1,49 @@
+/* 
+ * Author: Thomas Ingleby <thomas.c.ingleby@intel.com>
+ * Copyright (c) 2014 Intel Corporation
+ *
+ * Pemission is hereby granted...
+ * license 
+ *
+ *
+ *See https://github.com/intel-iot-devkit/mraa/blob/master/examples/c%2B%2B/Pwm3-cycle.cpp for full original file
+*/
+
+#include <unistd.h>
+#include <signal.h>
+
+#include <mraa.hpp>
+
+int running = 0;
+
+void sig_handler(int signo) {
+	if (signo == SIGINT) {
+		printf("closing PWM nicely\n");
+		running = -1;
+	}
+}
+
+int main() {
+	signal (SIGINT, sig_handler);
+	mraa::Pwm* pwm;
+
+	pwm = new mraa::Pwm(3);
+	if (pwm == NULL) {
+		return MRAA_ERROR_UNSPECIFIED;
+	}
+	fprintf(stdout, "Cycling PWM on IO3 (pwm3) \n");
+	pwm->enable(true);
+
+	float value = 0.0f;
+	while (running == 0){
+		value = value + 0.01f;
+		pwm->write(value);
+		usleep(50000);
+		if (value >= 1.0f){
+			value = 0.0f;
+		}
+	}
+	delete pwm;
+
+	return MRAA_SUCCESS;
+}

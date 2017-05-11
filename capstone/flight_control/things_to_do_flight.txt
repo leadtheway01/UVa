@@ -1,0 +1,27 @@
+1) buzzer?
+
+2) def is_ready()
+	checking if the box is closed before taking off
+
+3) def check_battery()
+	fail safe if battery is low
+
+4) image based flight
+
+5) tune gps condition
+    targetDistance = get_distance_metres(currentLocation, targetLocation)
+    gotoFunction(targetLocation)
+    
+    #print "DEBUG: targetLocation: %s" % targetLocation
+    #print "DEBUG: targetLocation: %s" % targetDistance
+
+    while vehicle.mode.name=="GUIDED": #Stop action if we are no longer in guided mode.
+        #print "DEBUG: mode: %s" % vehicle.mode.name
+        remainingDistance=get_distance_metres(vehicle.location.global_relative_frame, targetLocation)
+        print "Distance to target: ", remainingDistance
+        if remainingDistance<=targetDistance*0.01: #Just below target, in case of undershoot.
+            print "Reached target"
+            break;
+        time.sleep(2)
+
+	
