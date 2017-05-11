@@ -1,0 +1,69 @@
+digraph G {
+	graph [fontname = "Helvetica"];
+	node [fontname = "Helvetica", shape=point];
+	edge [fontname = "Helvetica"];
+
+	a -> al;
+	am [label="", width=0.1, style=invis];
+	a -> am [style=invis];
+	a -> ar;
+	
+	al -> all;
+	alm [label="", width=0.1, style=invis];
+	al -> alm [style=invis];
+	al -> alr;
+	ar -> arl;
+	arm [label="", width=0.1, style=invis];
+	ar -> arm [style=invis];
+	ar -> arr;
+
+	all -> alll;
+	allm [label="", width=0.1, style=invis];
+	all -> allm [style=invis];
+	all -> allr;
+	alr -> alrl;
+	alrm [label="", width=0.1, style=invis];
+	alr -> alrm [style=invis];
+	alr -> alrr;
+	arl -> arll;
+	arlm [label="", width=0.1, style=invis];
+	arl -> arlm [style=invis];
+	arl -> arlr;
+	arr -> arrl;
+	arrm [label="", width=0.1, style=invis];
+	arr -> arrm [style=invis];
+	arr -> arrr;
+
+	alll -> allll;
+	alllm [label="", width=0.1, style=invis];
+	alll -> alllm [style=invis];
+	alll -> alllr;
+	allr -> allrl;
+	allrm [label="", width=0.1, style=invis];
+	allr -> allrm [style=invis];
+	allr -> allrr;
+	alrl -> alrll;
+	alrlm [label="", width=0.1, style=invis];
+	alrl -> alrlm [style=invis];
+	alrl -> alrlr;
+	alrr -> alrrl;
+	alrrm [label="", width=0.1, style=invis];
+	alrr -> alrrm [style=invis];
+	alrr -> alrrr;
+	arll -> arlll;
+	arllm [label="", width=0.1, style=invis];
+	arll -> arllm [style=invis];
+	arll -> arllr;
+	arlr -> arlrl;
+	arlrm [label="", width=0.1, style=invis];
+	arlr -> arlrm [style=invis];
+	arlr -> arlrr;
+	arrl -> arrll;
+	arrlm [label="", width=0.1, style=invis];
+	arrl -> arrlm [style=invis];
+	arrl -> arrlr;
+	arrr -> arrrl;
+	arrrm [label="", width=0.1, style=invis];
+	arrr -> arrrm [style=invis];
+	arrr -> arrrr;
+}
