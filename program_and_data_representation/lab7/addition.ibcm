@@ -1,0 +1,39 @@
+C007 000		jmp 	start 	skip around the variables
+0000 001 sum  	dw		0 		int sum
+0000 002 a		dw		0 		int a
+0000 003 b 		dw		0 		int b
+0000 004 c 		dw 		0       int c
+0001 005 one	dw		1
+0000 006      					leave space for future change
+3001 007 start  load 	sum		sum += 1 to get into the loop // while(sum != 0){}
+5005 008  		add 	one
+4001 009		store   sum
+3001 00A loop	load	sum		if sum == 0 goto xit
+D01F 00B 		jmpe	xit
+1000 00C 		readH			read a
+4002 00D 		store	a
+1000 00E 		readH			read b
+4003 00F 		store 	b
+1000 010        readH			read c
+4004 011 		store 	c
+3001 012		load 	sum		sum -sum = 0
+6001 013		sub		sum
+4001 014		store 	sum
+3001 015 		load	sum			
+5002 016 		add	a 			add a to sum
+4001 017 		store 	sum
+3001 018 		load 	sum
+5003 019 		add 	b 		add b to sum
+4001 01A 		store 	sum
+3001 01B 		load 	sum
+5004 01C 		add 	c 		add c to sum
+4001 01D 		store 	sum		sum = a + b + c
+C00A 01E 		jmp 	loop 	goto the beginning of the loop
+3002 01F xit	load 	a 		prints a
+1800 020 		printH			
+3003 021 		load 	b 		prints b
+1800 022 		printH
+3004 023 		load 	c 		prints c
+1800 024 		printH
+0000 025 		Halt			Halt
+b000 026 		nop				Wright Kim (wdk7bj) addition.ibcm

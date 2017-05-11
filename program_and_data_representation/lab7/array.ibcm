@@ -1,0 +1,40 @@
+C00D 000 		jmp 	start 	skip around the variables
+0001 001 a[0]	dw		1		a[0] = 1
+0002 002 a[1] 	dw 		2 		a[1] = 2
+0014 003 a[2] 	dw 		20 		a[2] = 20
+0032 004 a[3] 	dw 		50 		a[3] = 50
+000A 005 a[4] 	dw 		10 		a[4] = 10
+0000 006 max 	dw 		0 		max = 0
+0000 007 i 		dw 		0 		i = 0
+6000 008 subit 	dw 		6000
+0005 009 five 	dw		5
+0001 00A one	dw		1
+3000 00B 		dw		3000
+0000 00C 						leave for future change
+3007 00D start  load  	i		if i = 5 goto xit (because array size is 5)
+6009 00E 		sub 	five	accu = i - 5
+D024 00F 		jmpe 	xit
+5009 010 		add 	five	accu i -5 + 5 = i
+4007 011		store 	i 		now i is back to before it was subtracted by 5
+3008 012 		load 	6000
+5001 013 		add 	a[0]
+5007 014 		add 	i
+4017 015		store  	doit	store instruction
+3006 016 		load 	max
+b000 017 doit 	nop				subtract array value from max
+E01D 018 		jumpl	change	change max to array value if max - array vaue < 0
+3007 019 inc   	load  	i 		i += 1
+500A 01A 		add 	one
+4007 01B 		store   i
+C00D 01C 		jmp 	start
+300B 01D change load 	3000
+5001 01E 		add		a[0]
+5007 01F 		add 	i
+4021 020		store 	doit
+b000 021 doit	nop				load array value to accumulator
+4006 022 		store 	max		now max is replaced to new max
+C019 023		jump 	inc	
+3006 024 xit 	load 	max
+1800 025 		printH
+0000 026		Halt	Halt
+b000 027		nop 			Wright Kim (wdk7bj) array.ibcm

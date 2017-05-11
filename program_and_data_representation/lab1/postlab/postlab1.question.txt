@@ -1,0 +1,7 @@
+//Wright Kim
+//wdk7bj
+//09/02/15
+
+List<int> *l = new List<int>();
+
+From above code, I can understand that *l is a pointer but what is the type of the pointer? Is the type of pointer a list? If so, how can it store more than one address? I thought that pointer can only point to one address of the memory.

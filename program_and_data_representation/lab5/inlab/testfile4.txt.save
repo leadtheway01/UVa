@@ -1,0 +1,13 @@
+    if(t != NULL){
+        depth += 1;
+        if(t->left == NULL && t->right == NULL){
+            return depth;
+        } else if(t->left != NULL && t->right == NULL){
+            return depth - 1 + int_path_length(t->left, depth);
+        } else if (t->left == NULL && t->right != NULL){
+            return depth - 1 + int_path_length(t->right, depth);
+        } else {
+            return depth - 1 + int_path_length(t->right, depth) + int_path_length(t->left, depth);
+        }
+    } 
+    return 0;

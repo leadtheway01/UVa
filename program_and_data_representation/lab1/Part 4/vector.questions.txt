@@ -1,0 +1,7 @@
+//Wright Kim
+//wdk7bj
+//lab 1
+//09/02/15
+
+I understand that when I comment out "using namespace std;" I have lots of 
+errors since vector, string, and iostream is standard library of c++. But I can't understand why there is no error when I comment out iostream preprocessor.I thought that I should not able to type in any input or see any ouputs since I comment out input and output stream but it wasn't like that.

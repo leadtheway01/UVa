@@ -1,0 +1,12 @@
+//Wright Kim
+//09/13/15
+//difficulties.txt
+
+The first difficult problem I encountered was that I misinderstood the
+concept of stack. I thought that the last in's next points the NULL,
+which was incorrect. After an advice of TA, I was able to write the code
+correctly.
+
+The second difficult problem I had was that I named my own stack class
+"stack" and had lots of errors when I compiled it. After changing the class
+name to "myStack", most of the errors were gone.

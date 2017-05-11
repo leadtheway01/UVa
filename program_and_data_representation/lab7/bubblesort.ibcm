@@ -1,0 +1,91 @@
+C014 000		jmp		start	skip around the variable
+0009 001 a[0]	dw		9		
+0008 002 a[1]	dw		8
+0007 003 a[2] 	dw		7
+0006 004 a[3]	dw		6
+0005 005 a[4]	dw		5
+0005 006 max	dw		5		size of array is 5
+0000 007 temp	dw				variable to switch array values
+0001 008 i 		dw				index for first for loop
+0005 009 j 		dw		5		index for second for loop
+0001 00A one	dw		1
+0003 00B k		dw		3		index for j-1
+0000 00C 		dw		
+4000 00D 		dw		4000
+3000 00E 		dw		3000
+6000 00F 		dw		6000
+0007 010		dw		7
+0000 011
+0000 012						leave space for future change
+0000 013									
+3006 014 start	load	max 	if i = 0 goto xit
+6008 015		sub		i		acc = max - i
+D050 016		jumpe	xit
+3009 017 2nd	load 	j 		if j < 0 goto inc
+600A 018		sub 	one		j-- decrement for j is here
+D046 019		jmpe 	inc
+4009 01A 		store  	j 		j is now 4
+300E 01B 		load 	3000	a[j]
+500A 01C 		add 	a[0]
+5009 01D 		add		j
+4023 01E		store
+300F 01F 		load 	6000	a[j-1] since k = j-1
+500A 020		add 	a[0]
+500B 021		add		k
+4024 022		store 			
+b000 023 doit 	nop		 		loads a[j]
+b000 024 subit  nop				subtracts a[j-1]
+E027 025 		jmpl 	swap
+C041 026 		jmp  	dec
+300E 027 swap	loads 	3000
+500A 028		add  	a[0]
+5009 029 		add 	j
+402B 02A		store
+b000 02B doit	nop				load a[j]
+4007 02C		store	temp	store a[j] at temp
+300E 02D 		load 	3000	
+500A 02E 		add  	a[0]
+500B 02F 		add 	k
+4035 030		store
+300D 031		load 	4000
+500A 032		add 	a[0]
+5009 033 		add 	j
+4036 034		store
+b000 035 doit	nop				load a[j-1]
+b000 036		nop 			store at a[j]
+300E 037		load 	3000
+5010 038		add 	7
+403E 039		store
+300D 03A		load 	4000
+500A 03B		add 	a[0]
+500B 03C 		add 	k
+403F 03D		store
+b000 03E		nop 			load value stored in temp
+b000 03F		nop				store that value at a[j-1]
+C041 040 		jmp 	dec
+300B 041 dec	load 	k
+600A 042 		sub 	one
+E017 043		jmpl 	2nd 	if K < 0 goto 2nd 
+400B 044 		store 	k 		else store k 
+C017 045		jmp 	2nd		
+3008 046 inc	load 	i
+500A 047		add 	one
+4008 048		store 	i
+3006 049		load 	max		max = 5
+4009 04A 		store 	j 		reset j value
+3009 04B		load 	j
+600A 04C		sub 	one
+600A 04D		sub 	one
+400B 04E		store 	k 		reset k value
+C014 04F		jump 	start
+3001 050 xit	load	a[0]	print a[0]
+1800 051		printH		
+3002 052		load 	a[1]	print a[1]
+1800 053		printH
+3003 054	 	load 	a[2]	print a[2]
+1800 055		printH
+3004 056 		load 	a[3] 	print a[3]
+1800 057 		printH
+3005 058 		load 	a[4] 	print a[4]
+1800 059 		printH
+0000 05A		Halt 	Halt	Wright Kim wdk7bj bubblesort.ibcm

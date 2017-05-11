@@ -1,0 +1,6 @@
+<map id="main" name="main">
+<area shape="rect" id="node2" href="$classMiddleEarth.html#ab07b5b14bbd71764f2e43e80efa487c2" title="Returns the list of cities to travel. " alt="" coords="105,5,269,32"/>
+<area shape="rect" id="node3" href="$traveling_8cpp.html#a3ebf9a45c8096113087be5ff2486f603" title="computes the total cost of travel " alt="" coords="125,56,249,83"/>
+<area shape="rect" id="node5" href="$traveling_8cpp.html#a34a28c8e1ca7c9fe4af677145a1c112f" title="prints out the route to travel " alt="" coords="145,107,228,133"/>
+<area shape="rect" id="node4" href="$classMiddleEarth.html#a19bcfa92e0223c3f3b4ac4414e005ad6" title="get distance of two cities " alt="" coords="318,56,487,83"/>
+</map>

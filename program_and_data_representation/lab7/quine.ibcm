@@ -1,0 +1,20 @@
+C006 000 		jmp		start	skip around variable
+0000 001 i		dw				increment by 1
+0001 002 one	dw
+0013 003 size	dw		13		total size of the code
+1800 004 printH	dw 		1800
+3000 005		dw 		3000
+3005 006 start	load 	3000
+5001 007		add 	i
+4009 008		store 			update address
+b000 009 doit	nop
+1800 00A		printH
+3001 00B		load 	i
+5002 00C		add 	one
+4001 00D		store 	i
+3003 00E 		load 	size
+6002 00F 		sub 	one
+E013 010 		jmpl 	Halt
+4003 011 		store 	size
+C006 012		jmp 	start
+0000 013		Halt	Halt 	Wright Kim wdk7bj quine.ibcm

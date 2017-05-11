@@ -1,0 +1,12 @@
+//Wright Kim
+//wdk7bj
+//lab 1
+//09/01/15
+1) At "LifeCycle.h" file, there are lots of *this inside the code. Is this *this function as this of java? 
+(After todays class, I assume it is a pointer. Am I correct?)
+
+2) What is the purpose of having default constructor, copy constructor and destructor? In Java, if I remember correctly, there were two types of constructors;default constructor and constructor. So I am assumming that the default is just default constructor and copy constructor is just constructor when comparing to Java, but why destructor?
+
+
+
+

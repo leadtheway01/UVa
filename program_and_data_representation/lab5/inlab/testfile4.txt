@@ -1,0 +1,13 @@
+We have already declared the necessary private data members and public inspector functions in binarysearchtree.h/cpp and avltree.h/cpp to hold this information. Your job is to modify the relevant routines to record the information correctly.
+
+Consult with the TAs if you have any questions.
+
+Once your code is working correctly, devise a reasonably convincing experiment to show that AVL trees are markedly superior to randomly grown BST trees. What does it cost to achieve such better performance? Can you characterize the situations where AVL trees perform better than BSTs? We have provided the files testfile1.txt, testfile2.txt and testfile3.txt, which in addition to your own test cases, may be of value.
+
+Your experiment should be in a testfile4.txt file, which you will have to submit. How and why does your example (that you include in testfile4.txt) show that AVL trees are better than BST trees? A single paragraph is fine, and this should be put into the post-lab report. The point of the testfile4.txt is for you to generate an experiment that shows a large difference in performance between AVL trees and BST trees. Just generating a long piece of text, with no reasoning behind it, is not what we are looking for.
+
+You will need to submit all of your code, along with the testfile4.txt file. Please make sure it compiles with make!
+
+For your postlab report you will need to provide evidence comparing the two types of trees. You may want to get started on this during the in-lab so you can be sure that your code is doing its calculations correctly.
+
+If you cannot finish this during the in-lab, you can request a 24 hour lab extension

@@ -1,0 +1,12 @@
+//Wright Kim
+//09/13/15
+//unix.question.txt
+
+1) %cd ~/unixstuff should take me to the directory unixstuff but it was not.
+Instead it was 'No such file or directory'. why?
+
+2) %cp /vol/examples/tutorial/science.txt . 
+above command didn't work for me. If I understood correctly it should copy
+science.txt file to current directory, but it didn't. why?
+
+3) Is pip only used when to redirect inputs and output?
