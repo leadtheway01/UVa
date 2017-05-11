@@ -1,0 +1,4 @@
+compile.sh compiles the included C source and assembly files with the necessary flags.
+
+gadget.s contains manually created gadgets.
+gen_input.sh is a bash script that generates the attack input.

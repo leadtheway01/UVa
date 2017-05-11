@@ -1,0 +1,4 @@
+-fno-stack-protector -D_FORTIFY_SOURCE=0 -z execstack
+sysctl -w kernel.randomize_va_space=0
+setarch i386 -RL bash
+(gdb) set disable-randomization off

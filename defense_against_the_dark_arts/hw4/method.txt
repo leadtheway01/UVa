@@ -1,0 +1,12 @@
+Wright Kim
+wdk7bj
+
+1) Solving the problem
+In order to do the tricky jump, I first needed to find the cavity. The cavity (NOP) was found from "InitializationApplication" function at memory address 0x0848461. To jump to the virus code successfully, had to replace "ret" (memory address: 0x0848460) instruction with "push [address of virus code]" and "ret". Using ghex, I was able to find the offset of "ret" from the start of the binary file, which was 0x460 or 1120 in decimal. Then as shown in the infect.c code, I placed the tricky jump instruction in the cavity.
+
+2) 
+a. file offset of the start of the function main: 0x40B
+b. file offset of the start of the function TerminateApplication: 0x439
+c. file offset of the start of the function InitializeApplication: 0x44D
+
+

@@ -1,0 +1,9 @@
+Case 1: Program crash
+	./format_string "%s%s"
+
+Case 2: View Stack
+	./format_string "%x%x"
+
+	
+	To view explictly the 2nd value (notice the single quote, it avoids bash to treat $x as env var)
+	./format_string '%2$x'
