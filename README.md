@@ -1,2 +1,2 @@
 # UVa
-This is a collection of school work and projects.
+This is a collection of school works and projects.
