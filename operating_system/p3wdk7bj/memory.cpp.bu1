@@ -1,0 +1,234 @@
+#include <iostream>
+#include <stdlib.h>
+#include <fstream>
+#include <math.h>
+#include <string>
+#include <unistd.h>
+#include <vector>
+#include <deque>
+
+using namespace std;
+
+int frameCount;
+unsigned int totalNumOfAddress;	// address.size()
+unsigned int tlbHit;			// increment when TLB hit
+double tlbHitRatio;				// tlbHit / totalNumOfAddress
+bool inTLB;						// is pageNum in TLB?
+bool tlbFIFO;					// if false, first fit, if ture, FIFO
+int pageFault;					// to count number of page faults
+unsigned int tlbIndex;			// for TLB FIFO
+bool frameLRU;					// if false, first fit, if ture, FIFO
+vector<int> address;	// to store addresses read from address.txt
+vector<int> pageNum;	// obtain page numbers from address
+deque<int> LruStack;	//LRU page replace stack approach
+
+struct tlbEntry {
+	bool filled;	// in TLB table?
+	int page;		// page number
+	int frame;		// frame number
+};
+
+struct pageTableEntry {
+	bool inPAS;	// in PAS?
+	int frame;		// frame number that contains page number
+};
+
+struct PASEntry {
+	bool filled;	// is frame empty or loaded
+	int page;		// page number in the frame
+	int bin[256];	// copy content from the bin file
+};
+
+//function prototype
+//void printTlbMiss(int pageNum);
+//void printTlbHit(int pageNum, int frameNum, int index);
+
+void printTlbMiss(int pageNum){
+    cout << "TLB MISS: page " << pageNum << " is not in the TLB" <<endl;
+}
+
+void printTlbHit(int pageNum, int frameNum, int index){
+    cout << "TLB HIT: page " << pageNum <<" is contained in frame " << frameNum << ", found in TLB entry " << index <<endl;
+}
+
+void printPasFound(int pageNum, int frameNum){
+	cout<<"FOUND: page "<<pageNum<<" is contained in frame "<<frameNum<<endl;
+}
+
+void printLoadTlb(int frameNum, int pageNum, int index){
+	cout << "TLB LOAD: frame " << frameNum <<" containing page "<<pageNum<<" in TLB entry " <<index<<endl;
+}
+
+void printPageFault(int address, int pageNum){
+	cout <<"PAGE FAULT: virtual address "<< address << " contained in page " << pageNum <<" caused a page fault!!"<<endl;
+}
+
+void printLoad(int pageNum, int frameNum){
+	cout <<"LOADED: page " <<pageNum<<" is loaded into frame "<<frameNum<<endl<<endl;
+}
+
+int tlbFifoIndex(int index){
+	index=index%4;
+	return index;
+}
+
+
+int main(){
+//=======================================================================
+	//get address from the address.txt
+	string line;
+	int tempAddr;
+	ifstream addressFile;
+	addressFile.open("address.txt");
+	if(addressFile.is_open())
+	{
+		while(getline(addressFile, line))
+		{
+			tempAddr = stoi(line);
+			address.push_back(tempAddr);	//store address read from file
+			//cout << tempAddr << '\n';
+		}
+		addressFile.close();
+	}//end of if
+	else cout << "can't open address.txt" <<endl;
+	
+	//get page number of the addresses
+	for(int i=0; i<address.size();i++){
+		pageNum.push_back(address[i]/256);
+		//cout << pageNum[i] <<endl;
+	}
+//========================================================================
+	//declare structs
+	tlbEntry Tlb[4];
+	pageTableEntry PageTable[16];
+	PASEntry Frame[8];
+	
+	//initialize variables
+	inTLB = false;
+	tlbFIFO = false;
+	frameLRU = false;
+	tlbIndex=0;
+	pageFault = 0;
+	frameCount=0;
+	for(int i=0; i<4; i++){
+    	Tlb[i].filled = false;
+    	Tlb[i].page = -1;
+    	Tlb[i].frame = -1;
+	}
+
+	for(int i=0; i<16; i++){
+    	PageTable[i].inPAS = false;
+    	PageTable[i].frame = -1;
+	}
+
+	for(int i=0; i<8; i++){
+    	Frame[i].filled = false;
+    	Frame[i].page = -1;
+	}
+	 //initialize stack with -1
+     for(int i=0;i<8;i++)
+     	LruStack.push_back(-1);
+
+	int index;
+	int page_num;
+	int pIndex;
+	for(index=0;index<address.size();index++){
+		page_num = pageNum[index];
+		//cout <<page_num<<endl;
+		
+		//first check if page_num is in the frame
+		pIndex=page_num;
+		bool inframe = false;
+		if(PageTable[pIndex].inPAS == true){//page # in the frame
+		//no page fault
+		//TLB MISS
+		//but page # found in the PAS, print FOUND
+		//load to TLB	
+			inframe=true;
+		}else if(PageTable[pIndex].inPAS == false){//page # not in the frame
+		pageFault++;	//increment page fault counter
+		//TLB MISS
+		//page fault print
+		// printPageFault(address[index], page_num);
+		//load to PAS
+		//load to TLB
+		}
+		
+		//if stack is all filled with -1. size ==0
+		int stackSize=0;
+		for(int i=0;i<8;i++){
+			if(LruStack.at(i)!=-1)
+				stackSize++;
+		}
+		
+		//LRU stack
+		bool inStack=false;
+		int stackIndex=0;
+		for(int i=0;i<8;i++){
+			if(LruStack.at(i) == page_num){
+				inStack=true;
+				stackIndex=i;
+			}
+		//	cout <<LruStack.at(i)<<endl;
+		}
+
+		deque<int>::iterator it;
+		it=LruStack.begin();//it is pointing index 0 of the LRU stack
+		if(LruStack.empty())//if stack is empty just push into the stack
+			LruStack.push_back(page_num);
+		else if(inStack==false){//if page num is not in stack
+			if(stackSize==8)	//if stack is full
+				LruStack.pop_front();
+			LruStack.push_back(page_num);
+			cout<<LruStack.at(8)<<endl;
+		}else if(inStack){//page num in stack
+			//page # either in the index0 or,
+			//somewhere else
+			if(stackSize==8){//stack full
+				if(LruStack.at(0)==page_num){
+					LruStack.pop_front();
+					LruStack.push_back(page_num);
+				}else{
+					for(int i=stackIndex;i<8;i++){//relocate values by 1 
+						LruStack.insert(it+stackIndex, LruStack.at(i));
+					}//end of for
+					LruStack.push_back(page_num);
+				}//end of else
+			}//end of if
+			else if(stackSize<8){//stack size less than 8
+				it+=stackIndex;
+				for(int i=stackIndex;i<stackSize;i++){
+					LruStack.insert(it, LruStack.at(i+1));
+					it++;	
+				}//end of for
+				it=LruStack.begin();
+				LruStack.insert(it+stackSize, page_num);
+			}//end of else if
+			
+		}//end of else if
+
+
+
+		//frame
+		if(frameCount>=0 && frameCount<=8){//frame not full. use first fit
+			Frame[frameCount].page = page_num;
+			Frame[frameCount].filled = true;
+			PageTable[pIndex].inPAS = true;
+			if(inframe==false)
+				// printLoad(page_num, frameCount);
+			//copy 256 bytes from bin
+			if(frameCount<8)
+				frameCount++;	//increament frameCount by 1 until 8
+		}else if(frameCount>8){//frame full. use LRU stack approach
+			
+		
+		}//end of else if
+				
+	}//end of for
+	for(int i=0; i<8;i++)
+		cout <<"stack " <<i<<" " <<LruStack.at(i)<<endl;	
+
+
+	return 0;
+}//end of main
+

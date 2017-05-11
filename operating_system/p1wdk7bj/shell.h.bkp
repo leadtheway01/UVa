@@ -1,0 +1,13 @@
+
+#IFNDEF SHELL_H
+#DEFINE SHELL_H
+#include "parsing.h"
+#include "processing.h"
+#include <string.h>
+#include <iostream>
+#include <cstdlib>
+#include <regex>
+#include <stdlib.h>
+#include <vector>
+#include <sstream>
+#ENDIF
